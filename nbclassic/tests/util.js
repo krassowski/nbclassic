@@ -32,6 +32,7 @@ casper.open_new_notebook = function () {
     this.withPopup('', function () {
         console.log(this.getHTML() )
     });
+    this.wait(1000);
     this.then(function () {
         console.log('this.popups', this.popups)
         console.log('this.popups[0].url', this.popups[0].url)
