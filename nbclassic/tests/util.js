@@ -33,6 +33,8 @@ casper.open_new_notebook = function () {
         console.log(this.getHTML() )
     });
     this.then(function () {
+        console.log('this.popups', this.popups)
+        console.log('this.popups[0].url', this.popups[0].url)
         this.open(this.popups[0].url);
     });
     this.waitFor(this.page_loaded);
