@@ -26,14 +26,16 @@ casper.open_new_notebook = function () {
     this.waitFor(this.page_loaded);
     this.waitForSelector('#kernel-python2 a, #kernel-python3 a');
     this.thenClick('#kernel-python2 a, #kernel-python3 a');
-    
+
     this.waitForPopup('');
 
+    this.withPopup('', function () {
+        console.log(this.getHTML() )
+    });
     this.then(function () {
         this.open(this.popups[0].url);
     });
     this.waitFor(this.page_loaded);
-    this.waitForSelector('.CodeMirror-code');
 
     // Hook the log and error methods of the console, forcing them to
     // serialize their arguments before printing.  This allows the
@@ -64,6 +66,7 @@ casper.open_new_notebook = function () {
         console.error = serialize_arguments(console.error, console);
     });
 
+    this.waitForSelector('.CodeMirror-code');
     // Make sure the kernel has started
     this.waitFor(this.kernel_running);
     // track the IPython busy/idle state
